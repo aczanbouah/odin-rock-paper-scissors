@@ -16,3 +16,49 @@ function getComputerChoice() {
   } else computerChoice = `scissors`;
   return computerChoice;
 }
+
+function getPlayerChoice() {
+  let playerChoice = prompt(`Rock, paper or scissors?`).toLowerCase();
+  return playerChoice;
+}
+
+function playRound(playerSelection, computerSelection) {
+  playerSelection = getPlayerChoice();
+  computerSelection = getComputerChoice();
+
+  switch (playerSelection) {
+    case "rock":
+      if (computerSelection === "scissors") {
+        console.log(`Player wins`);
+        return;
+      } else if (playerSelection === computerSelection) {
+        console.log(`It's a draw!`);
+        return playRound(playerSelection, computerSelection);
+      } else {
+        console.log(`Computer wins!`);
+        return;
+      }
+    case "paper":
+      if (computerSelection === "rock") {
+        console.log(`Player wins`);
+        return;
+      } else if (playerSelection === computerSelection) {
+        console.log(`It's a draw!`);
+        return playRound(playerSelection, computerSelection);
+      } else {
+        console.log(`Computer wins!`);
+        return;
+      }
+    case "scissors":
+      if (computerSelection === "paper") {
+        console.log(`Player wins`);
+        return;
+      } else if (playerSelection === computerSelection) {
+        console.log(`It's a draw!`);
+        return playRound(playerSelection, computerSelection);
+      } else {
+        console.log(`Computer wins!`);
+        return;
+      }
+  }
+}
