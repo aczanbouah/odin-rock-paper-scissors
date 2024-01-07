@@ -29,36 +29,47 @@ function playRound(playerSelection, computerSelection) {
   switch (playerSelection) {
     case "rock":
       if (computerSelection === "scissors") {
-        console.log(`Player wins`);
-        return;
+        return playerScore++;
       } else if (playerSelection === computerSelection) {
         console.log(`It's a draw!`);
         return playRound(playerSelection, computerSelection);
       } else {
-        console.log(`Computer wins!`);
-        return;
+        return computerScore++;
       }
     case "paper":
       if (computerSelection === "rock") {
-        console.log(`Player wins`);
-        return;
+        return playerScore++;
       } else if (playerSelection === computerSelection) {
         console.log(`It's a draw!`);
         return playRound(playerSelection, computerSelection);
       } else {
-        console.log(`Computer wins!`);
-        return;
+        return computerScore++;
       }
     case "scissors":
       if (computerSelection === "paper") {
-        console.log(`Player wins`);
-        return;
+        return playerScore++;
       } else if (playerSelection === computerSelection) {
         console.log(`It's a draw!`);
         return playRound(playerSelection, computerSelection);
       } else {
-        console.log(`Computer wins!`);
-        return;
+        return computerScore++;
       }
+    default:
+      console.log("Invalid selection");
+      return;
+  }
+}
+
+let playerScore = 0;
+let computerScore = 0;
+
+function game() {
+  while (playerScore !== 5 || computerScore !== 5) {
+    playRound();
+    if (playerScore === 5) {
+      return console.log("Congrats you win");
+    } else if (computerScore === 5) {
+      return console.log(`Sorry! You lost!`);
+    }
   }
 }
