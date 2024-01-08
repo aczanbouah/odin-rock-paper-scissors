@@ -1,4 +1,5 @@
-console.log("Hey there!");
+let playerScore = 0;
+let computerScore = 0;
 
 function getRandomNumber(min, max) {
   min = Math.ceil(min);
@@ -22,6 +23,29 @@ function getPlayerChoice() {
   return playerChoice;
 }
 
+function playerWinsRound(playerSelection, computerSelection) {
+  return console.log(
+    `You win the round - ${playerSelection} beats ${computerSelection}`
+  );
+}
+
+function computerWinsRound(playerSelection, computerSelection) {
+  return console.log(
+    `You lost the round - ${playerSelection} loses to ${computerSelection}`
+  );
+}
+
+function showScore() {
+  console.log(`Your score - ${playerScore}`);
+  console.log(`Computer score - ${computerScore}`);
+}
+
+function resetGame() {
+  playerScore = 0;
+  computerScore = 0;
+  game();
+}
+
 function playRound(playerSelection, computerSelection) {
   playerSelection = getPlayerChoice();
   computerSelection = getComputerChoice();
@@ -29,39 +53,48 @@ function playRound(playerSelection, computerSelection) {
   switch (playerSelection) {
     case "rock":
       if (computerSelection === "scissors") {
-        return playerScore++;
+        playerScore++;
+        showScore();
+        return playerWinsRound(playerSelection, computerSelection);
       } else if (playerSelection === computerSelection) {
         console.log(`It's a draw!`);
         return playRound(playerSelection, computerSelection);
       } else {
-        return computerScore++;
+        computerScore++;
+        showScore();
+        return computerWinsRound(playerSelection, computerSelection);
       }
     case "paper":
       if (computerSelection === "rock") {
-        return playerScore++;
+        playerScore++;
+        showScore();
+        return playerWinsRound(playerSelection, computerSelection);
       } else if (playerSelection === computerSelection) {
         console.log(`It's a draw!`);
         return playRound(playerSelection, computerSelection);
       } else {
-        return computerScore++;
+        computerScore++;
+        showScore();
+        return computerWinsRound(playerSelection, computerSelection);
       }
     case "scissors":
       if (computerSelection === "paper") {
-        return playerScore++;
+        playerScore++;
+        showScore();
+        return playerWinsRound(playerSelection, computerSelection);
       } else if (playerSelection === computerSelection) {
         console.log(`It's a draw!`);
         return playRound(playerSelection, computerSelection);
       } else {
-        return computerScore++;
+        computerScore++;
+        showScore();
+        return computerWinsRound(playerSelection, computerSelection);
       }
     default:
       console.log("Invalid selection");
       return;
   }
 }
-
-let playerScore = 0;
-let computerScore = 0;
 
 function game() {
   while (playerScore !== 5 || computerScore !== 5) {
