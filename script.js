@@ -24,12 +24,14 @@ function getPlayerChoice() {
 }
 
 function playerWinsRound(playerSelection, computerSelection) {
+  playerScore++;
   return console.log(
     `You win the round - ${playerSelection} beats ${computerSelection}`
   );
 }
 
 function computerWinsRound(playerSelection, computerSelection) {
+  computerScore++;
   return console.log(
     `You lost the round - ${playerSelection} loses to ${computerSelection}`
   );
@@ -53,42 +55,36 @@ function playRound(playerSelection, computerSelection) {
   switch (playerSelection) {
     case "rock":
       if (computerSelection === "scissors") {
-        playerScore++;
-        showScore();
-        return playerWinsRound(playerSelection, computerSelection);
+        playerWinsRound(playerSelection, computerSelection);
+        return showScore();
       } else if (playerSelection === computerSelection) {
         console.log(`It's a draw!`);
         return playRound(playerSelection, computerSelection);
       } else {
-        computerScore++;
-        showScore();
-        return computerWinsRound(playerSelection, computerSelection);
+        computerWinsRound(playerSelection, computerSelection);
+        return showScore();
       }
     case "paper":
       if (computerSelection === "rock") {
-        playerScore++;
-        showScore();
-        return playerWinsRound(playerSelection, computerSelection);
+        playerWinsRound(playerSelection, computerSelection);
+        return showScore();
       } else if (playerSelection === computerSelection) {
         console.log(`It's a draw!`);
         return playRound(playerSelection, computerSelection);
       } else {
-        computerScore++;
-        showScore();
-        return computerWinsRound(playerSelection, computerSelection);
+        computerWinsRound(playerSelection, computerSelection);
+        return showScore();
       }
     case "scissors":
       if (computerSelection === "paper") {
-        playerScore++;
-        showScore();
-        return playerWinsRound(playerSelection, computerSelection);
+        playerWinsRound(playerSelection, computerSelection);
+        return showScore();
       } else if (playerSelection === computerSelection) {
         console.log(`It's a draw!`);
         return playRound(playerSelection, computerSelection);
       } else {
-        computerScore++;
-        showScore();
-        return computerWinsRound(playerSelection, computerSelection);
+        computerWinsRound(playerSelection, computerSelection);
+        return showScore();
       }
     default:
       console.log("Invalid selection");
