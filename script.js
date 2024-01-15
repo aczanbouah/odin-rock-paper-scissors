@@ -1,6 +1,11 @@
 let playerScore = 0;
 let computerScore = 0;
 
+const playerCounter = document.querySelector(".player-score");
+playerCounter.innerText = playerScore;
+const computerCounter = document.querySelector(".computer-score");
+computerCounter.innerText = computerScore;
+
 function getRandomNumber(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -18,10 +23,20 @@ function getComputerChoice() {
   return computerChoice;
 }
 
-function getPlayerChoice() {
-  let playerChoice = prompt(`Rock, paper or scissors?`).toLowerCase();
-  return playerChoice;
-}
+const rockButton = document.querySelector(".rock");
+rockButton.addEventListener("click", () => {
+  playRound("rock");
+});
+
+const paperButton = document.querySelector(".paper");
+paperButton.addEventListener("click", () => {
+  playRound("paper");
+});
+
+const scissorsButton = document.querySelector(".scissors");
+scissorsButton.addEventListener("click", () => {
+  playRound("scissors");
+});
 
 function playerWinsRound(playerSelection, computerSelection) {
   playerScore++;
@@ -38,8 +53,8 @@ function computerWinsRound(playerSelection, computerSelection) {
 }
 
 function showScore() {
-  console.log(`Your score - ${playerScore}`);
-  console.log(`Computer score - ${computerScore}`);
+  playerCounter.innerText = playerScore;
+  computerCounter.innerText = computerScore;
 }
 
 function resetGame() {
@@ -49,9 +64,7 @@ function resetGame() {
 }
 
 function playRound(playerSelection, computerSelection) {
-  playerSelection = getPlayerChoice();
   computerSelection = getComputerChoice();
-
   switch (playerSelection) {
     case "rock":
       if (computerSelection === "scissors") {
@@ -70,7 +83,7 @@ function playRound(playerSelection, computerSelection) {
         return showScore();
       } else if (playerSelection === computerSelection) {
         console.log(`It's a draw!`);
-        return playRound(playerSelection, computerSelection);
+        return showScore();
       } else {
         computerWinsRound(playerSelection, computerSelection);
         return showScore();
@@ -92,13 +105,13 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-function game() {
-  while (playerScore !== 5 || computerScore !== 5) {
-    playRound();
-    if (playerScore === 5) {
-      return console.log("Congrats you win");
-    } else if (computerScore === 5) {
-      return console.log(`Sorry! You lost!`);
-    }
-  }
-}
+// function game() {
+//   while (playerScore !== 5 || computerScore !== 5) {
+//     playRound();
+//     if (playerScore === 5) {
+//       return console.log("Congrats you win");
+//     } else if (computerScore === 5) {
+//       return console.log(`Sorry! You lost!`);
+//     }
+//   }
+// }
