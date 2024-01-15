@@ -6,6 +6,34 @@ playerCounter.innerText = playerScore;
 const computerCounter = document.querySelector(".computer-score");
 computerCounter.innerText = computerScore;
 const roundResult = document.querySelector(".round-result");
+const rockButton = document.querySelector(".rock");
+const paperButton = document.querySelector(".paper");
+const scissorsButton = document.querySelector(".scissors");
+const gameResult = document.querySelector(".game-result");
+
+function addButtonListeners() {
+  rockButton.addEventListener("click", () => {
+    playRound("rock");
+  });
+  paperButton.addEventListener("click", () => {
+    playRound("paper");
+  });
+  scissorsButton.addEventListener("click", () => {
+    playRound("scissors");
+  });
+}
+
+function removeButtonListeners() {
+  rockButton.removeEventListener("click", () => {
+    playRound("rock");
+  });
+  paperButton.removeEventListener("click", () => {
+    playRound("paper");
+  });
+  scissorsButton.removeEventListener("click", () => {
+    playRound("scissors");
+  });
+}
 
 function getRandomNumber(min, max) {
   min = Math.ceil(min);
@@ -23,21 +51,6 @@ function getComputerChoice() {
   } else computerChoice = `scissors`;
   return computerChoice;
 }
-
-const rockButton = document.querySelector(".rock");
-rockButton.addEventListener("click", () => {
-  playRound("rock");
-});
-
-const paperButton = document.querySelector(".paper");
-paperButton.addEventListener("click", () => {
-  playRound("paper");
-});
-
-const scissorsButton = document.querySelector(".scissors");
-scissorsButton.addEventListener("click", () => {
-  playRound("scissors");
-});
 
 function playerWinsRound(playerSelection, computerSelection) {
   playerScore++;
@@ -57,6 +70,8 @@ function showScore() {
 function resetGame() {
   playerScore = 0;
   computerScore = 0;
+  roundResult.innerText = "Good luck!";
+  gameResult.innerText = "";
   game();
 }
 
@@ -102,13 +117,19 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-// function game() {
-//   while (playerScore !== 5 || computerScore !== 5) {
-//     playRound();
-//     if (playerScore === 5) {
-//       return console.log("Congrats you win");
-//     } else if (computerScore === 5) {
-//       return console.log(`Sorry! You lost!`);
-//     }
-//   }
-// }
+function game() {
+  let isGameOver = false;
+  addButtonListeners();
+  while (!isGameOver) {
+    if (playerScore === 5 || computerScore === 5) {
+      isGameOver = true;
+      if (playerScore === 5) {
+        gameResult.innerText = "Great job! You've won the game!";
+        return removeButtonListeners();
+      } else {
+        gameResult.innerText = "Tough luck! The computer won!";
+        return removeButtonListeners();
+      }
+    }
+  }
+}
