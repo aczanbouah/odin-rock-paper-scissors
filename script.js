@@ -5,6 +5,7 @@ const playerCounter = document.querySelector(".player-score");
 playerCounter.innerText = playerScore;
 const computerCounter = document.querySelector(".computer-score");
 computerCounter.innerText = computerScore;
+const roundResult = document.querySelector(".round-result");
 
 function getRandomNumber(min, max) {
   min = Math.ceil(min);
@@ -40,16 +41,12 @@ scissorsButton.addEventListener("click", () => {
 
 function playerWinsRound(playerSelection, computerSelection) {
   playerScore++;
-  return console.log(
-    `You win the round - ${playerSelection} beats ${computerSelection}`
-  );
+  return (roundResult.innerText = `You win the round - ${playerSelection} beats ${computerSelection}`);
 }
 
 function computerWinsRound(playerSelection, computerSelection) {
   computerScore++;
-  return console.log(
-    `You lost the round - ${playerSelection} loses to ${computerSelection}`
-  );
+  return (roundResult.innerText = `You lost the round - ${playerSelection} loses to ${computerSelection}`);
 }
 
 function showScore() {
@@ -71,8 +68,8 @@ function playRound(playerSelection, computerSelection) {
         playerWinsRound(playerSelection, computerSelection);
         return showScore();
       } else if (playerSelection === computerSelection) {
-        console.log(`It's a draw!`);
-        return playRound(playerSelection, computerSelection);
+        roundResult.innerText = "It's a draw!";
+        return showScore();
       } else {
         computerWinsRound(playerSelection, computerSelection);
         return showScore();
@@ -82,7 +79,7 @@ function playRound(playerSelection, computerSelection) {
         playerWinsRound(playerSelection, computerSelection);
         return showScore();
       } else if (playerSelection === computerSelection) {
-        console.log(`It's a draw!`);
+        roundResult.innerText = "It's a draw!";
         return showScore();
       } else {
         computerWinsRound(playerSelection, computerSelection);
@@ -93,8 +90,8 @@ function playRound(playerSelection, computerSelection) {
         playerWinsRound(playerSelection, computerSelection);
         return showScore();
       } else if (playerSelection === computerSelection) {
-        console.log(`It's a draw!`);
-        return playRound(playerSelection, computerSelection);
+        roundResult.innerText = "It's a draw!";
+        return showScore();
       } else {
         computerWinsRound(playerSelection, computerSelection);
         return showScore();
