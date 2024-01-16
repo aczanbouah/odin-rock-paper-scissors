@@ -67,12 +67,24 @@ function showScore() {
   computerCounter.innerText = computerScore;
 }
 
+function checkScore() {
+  if (playerScore === 5 || computerScore === 5) {
+    if (playerScore === 5) {
+      gameResult.innerText = "Congrats! You've won the game!";
+      return removeButtonListeners();
+    } else {
+      gameResult.innerText = "Tough luck! Computer won the game!";
+      return removeButtonListeners();
+    }
+  }
+}
+
 function resetGame() {
   playerScore = 0;
   computerScore = 0;
   roundResult.innerText = "Good luck!";
   gameResult.innerText = "";
-  game();
+  addButtonListeners();
 }
 
 function playRound(playerSelection, computerSelection) {
@@ -81,35 +93,44 @@ function playRound(playerSelection, computerSelection) {
     case "rock":
       if (computerSelection === "scissors") {
         playerWinsRound(playerSelection, computerSelection);
-        return showScore();
+        showScore();
+        return checkScore();
       } else if (playerSelection === computerSelection) {
         roundResult.innerText = "It's a draw!";
-        return showScore();
+        showScore();
+        return checkScore();
       } else {
         computerWinsRound(playerSelection, computerSelection);
-        return showScore();
+        showScore();
+        return checkScore();
       }
     case "paper":
       if (computerSelection === "rock") {
         playerWinsRound(playerSelection, computerSelection);
-        return showScore();
+        showScore();
+        return checkScore();
       } else if (playerSelection === computerSelection) {
         roundResult.innerText = "It's a draw!";
-        return showScore();
+        showScore();
+        return checkScore();
       } else {
         computerWinsRound(playerSelection, computerSelection);
-        return showScore();
+        showScore();
+        return checkScore();
       }
     case "scissors":
       if (computerSelection === "paper") {
         playerWinsRound(playerSelection, computerSelection);
-        return showScore();
+        showScore();
+        return checkScore();
       } else if (playerSelection === computerSelection) {
         roundResult.innerText = "It's a draw!";
-        return showScore();
+        showScore();
+        return checkScore();
       } else {
         computerWinsRound(playerSelection, computerSelection);
-        return showScore();
+        showScore();
+        return checkScore();
       }
     default:
       console.log("Invalid selection");
@@ -117,19 +138,4 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-function game() {
-  let isGameOver = false;
-  addButtonListeners();
-  while (!isGameOver) {
-    if (playerScore === 5 || computerScore === 5) {
-      isGameOver = true;
-      if (playerScore === 5) {
-        gameResult.innerText = "Great job! You've won the game!";
-        return removeButtonListeners();
-      } else {
-        gameResult.innerText = "Tough luck! The computer won!";
-        return removeButtonListeners();
-      }
-    }
-  }
-}
+resetGame();
