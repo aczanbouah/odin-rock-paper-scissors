@@ -10,6 +10,11 @@ const rockButton = document.querySelector(".rock");
 const paperButton = document.querySelector(".paper");
 const scissorsButton = document.querySelector(".scissors");
 const gameResult = document.querySelector(".game-result");
+const resetGameButton = document.createElement("button");
+const resultsContainer = document.querySelector(".results");
+resetGameButton.classList.add("start-game");
+resetGameButton.innerText = "Start new game";
+resetGameButton.addEventListener("click", resetGame);
 
 const playRock = () => {
   playRound("rock");
@@ -70,6 +75,7 @@ function showScore() {
 function checkScore() {
   if (playerScore === 5 || computerScore === 5) {
     removeButtonListeners();
+    resultsContainer.appendChild(resetGameButton);
     if (playerScore === 5) {
       gameResult.innerText = "Congrats! You've won the game!";
     } else {
@@ -83,6 +89,8 @@ function resetGame() {
   computerScore = 0;
   roundResult.innerText = "Good luck!";
   gameResult.innerText = "";
+  resultsContainer.removeChild(resetGameButton);
+  showScore();
   addButtonListeners();
 }
 
@@ -137,4 +145,4 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-resetGame();
+addButtonListeners();
