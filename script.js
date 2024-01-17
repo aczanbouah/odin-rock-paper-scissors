@@ -11,28 +11,28 @@ const paperButton = document.querySelector(".paper");
 const scissorsButton = document.querySelector(".scissors");
 const gameResult = document.querySelector(".game-result");
 
+const playRock = () => {
+  playRound("rock");
+};
+
+const playPaper = () => {
+  playRound("paper");
+};
+
+const playScissors = () => {
+  playRound("scissors");
+};
+
 function addButtonListeners() {
-  rockButton.addEventListener("click", () => {
-    playRound("rock");
-  });
-  paperButton.addEventListener("click", () => {
-    playRound("paper");
-  });
-  scissorsButton.addEventListener("click", () => {
-    playRound("scissors");
-  });
+  rockButton.addEventListener("click", playRock);
+  paperButton.addEventListener("click", playPaper);
+  scissorsButton.addEventListener("click", playScissors);
 }
 
 function removeButtonListeners() {
-  rockButton.removeEventListener("click", () => {
-    playRound("rock");
-  });
-  paperButton.removeEventListener("click", () => {
-    playRound("paper");
-  });
-  scissorsButton.removeEventListener("click", () => {
-    playRound("scissors");
-  });
+  rockButton.removeEventListener("click", playRock);
+  paperButton.removeEventListener("click", playPaper);
+  scissorsButton.removeEventListener("click", playScissors);
 }
 
 function getRandomNumber(min, max) {
@@ -69,12 +69,11 @@ function showScore() {
 
 function checkScore() {
   if (playerScore === 5 || computerScore === 5) {
+    removeButtonListeners();
     if (playerScore === 5) {
       gameResult.innerText = "Congrats! You've won the game!";
-      return removeButtonListeners();
     } else {
       gameResult.innerText = "Tough luck! Computer won the game!";
-      return removeButtonListeners();
     }
   }
 }
