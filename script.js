@@ -12,7 +12,7 @@ const scissorsButton = document.querySelector(".scissors");
 const gameResult = document.querySelector(".game-result");
 const resetGameButton = document.createElement("button");
 const resultsContainer = document.querySelector(".results");
-resetGameButton.classList.add("start-game");
+resetGameButton.classList.add("btn");
 resetGameButton.innerText = "Start new game";
 resetGameButton.addEventListener("click", resetGame);
 
